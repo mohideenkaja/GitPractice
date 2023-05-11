@@ -1,0 +1,46 @@
+@Test(priority=8)
+public void getCityList()
+{
+	List<Header> listHeader = new ArrayList<>();
+	Header h1 = new Header("accept", "application/json");
+	Header h3 = new Header("Content-Type", "application/json");
+	
+	listHeader.add(h1);
+	listHeader.add(h3);
+	
+	Headers headers = new Headers(listHeader);
+	addHeaders(headers);
+	
+	CityList_Input_Pojo cityList_Input_Pojo = new CityList_Input_Pojo(stateId);
+	addBody(cityList_Input_Pojo);
+	
+	Response response = addReqType("POST", "https://omrbranch.com/api/cityList");
+	int actStatusCode = getStatusCode(response);
+	println(actStatusCode);
+	Assert.assertEquals(actStatusCode, 200, "Verify status code");
+	
+	CityList_Output_Pojo cityList_Output_Pojo = response.as(CityList_Output_Pojo.class);
+	ArrayList<CityList> cityList = cityList_Output_Pojo.getData();
+	
+	for(CityList eachCityList : cityList)
+	{
+		String cityName = eachCityList.getName();
+		if(cityName.equals("Yercaud"))
+		{
+			int cityIdNum = eachCityList.getId();
+			println(cityIdNum);
+			break;
+		}
+	}
+	String actMessage = CityList_Output_Pojo.getMessage();
+	Assert.assertEquals(actMessage, "OK", "Verify OK");
+}
+
+1-getLogIn
+2-getStateList
+3-getCityList
+4-addUserAddress
+5-updateUserAddress
+6-getUserAddress
+7-deleteUserAddress
+8-searchProduct
