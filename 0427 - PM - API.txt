@@ -1,15 +1,7 @@
 @Test(priority=8)
 public void getCityList()
 {
-	List<Header> listHeader = new ArrayList<>();
-	Header h1 = new Header("accept", "application/json");
-	Header h3 = new Header("Content-Type", "application/json");
 	
-	listHeader.add(h1);
-	listHeader.add(h3);
-	
-	Headers headers = new Headers(listHeader);
-	addHeaders(headers);
 	
 	CityList_Input_Pojo cityList_Input_Pojo = new CityList_Input_Pojo(stateId);
 	addBody(cityList_Input_Pojo);
@@ -44,3 +36,6 @@ public void getCityList()
 6-getUserAddress
 7-deleteUserAddress
 8-searchProduct
+
+@Test(priority=9)
+public void getCityList()
